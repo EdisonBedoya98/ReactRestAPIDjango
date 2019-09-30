@@ -37,7 +37,7 @@ class FormSentimentIndex extends Component {
                 <div className="column">
                     <form>
                         <div className="field">
-                            <h1>Tweet a analizar</h1>
+                            <h1>Tweet to analyze</h1>
                             <div className="control">
                                 <input                                    
                                     autofocus
