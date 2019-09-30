@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Button from 'react-bootstrap/Button'
 class FormSentimentIndex extends Component {
     static propTypes = {
         endpoint: PropTypes.string.isRequired
     };
     state = {
-        // name: "",
-        // email: "",
-        // message: ""
         loaded: false,
         texto: "",
         feeling: ""
@@ -37,11 +35,12 @@ class FormSentimentIndex extends Component {
         return (
             <div>
                 <div className="column">
-                    <form onSubmit={this.handleSubmit}>
+                    <form>
                         <div className="field">
-                            <label className="label">Tweet a analizar</label>
+                            <h1>Tweet a analizar</h1>
                             <div className="control">
-                                <input
+                                <input                                    
+                                    autofocus
                                     className="input"
                                     type="text"
                                     name="texto"
@@ -52,14 +51,20 @@ class FormSentimentIndex extends Component {
                             </div>
                         </div>
                         <div className="control">
-                            <button type="submit" className="button is-info">
-                                Do sentiment analisis
-            </button>
+                            <Button
+                                variant="primary"
+                                onClick={this.handleSubmit}
+                            >
+                                {loaded ? 'New analisis' : 'OK. sentiment analisis'}
+                            </Button>
+
+
+
                         </div>
                     </form>
                 </div>
                 <div>
-                    The feeling for this tweet is <b>{loaded ? feeling : 'Waiting for click'}</b>
+                    The feeling for this tweet is <b>{loaded ? feeling : 'Waiting analisis'}</b>
 
                 </div>
 
