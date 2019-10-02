@@ -1,6 +1,6 @@
 import React from 'react';
-import DataProvider from "./DataProvider";
-import Table from "./Table";
+// import DataProvider from "./DataProvider";
+// import Table from "./Table";
 import FormSentimentIndex from "./FormSentimentIndex";
 import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
@@ -10,7 +10,7 @@ function App() {
         rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossorigin="anonymous"
+        crossOrigin="anonymous"
       />
       <div className="App" >
         {/* <DataProvider endpoint="http://127.0.0.1:8000/api/classifier/"

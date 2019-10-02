@@ -30,6 +30,7 @@ class FormSentimentIndex extends Component {
 
         });
     };
+
     render() {
         const { loaded, texto, feeling } = this.state;
         return (
@@ -38,19 +39,19 @@ class FormSentimentIndex extends Component {
                     <form>
                         <div className="field">
                             <h1>Tweet to analyze</h1>
-                            <div className="control">
-                                <input                                    
-                                    autofocus
+                            <div className="control mt-5">
+                                <input
+                                    autoFocus
                                     className="input"
                                     type="text"
                                     name="texto"
                                     onChange={this.handleChange}
                                     value={texto}
                                     required
-                                />
+                                    size="80" />
                             </div>
                         </div>
-                        <div className="control">
+                        <div className="control mt-5" >
                             <Button
                                 variant="primary"
                                 onClick={this.handleSubmit}
@@ -63,8 +64,16 @@ class FormSentimentIndex extends Component {
                         </div>
                     </form>
                 </div>
-                <div>
-                    The feeling for this tweet is <b>{loaded ? feeling : 'Waiting analisis'}</b>
+                <div className="mt-5">
+                    The feeling for this tweet is <b>{loaded ? (() => {
+                        switch (feeling) {
+                            case "[[0]]": return "Negative";
+                            case "[[1]]": return "Positive";
+                            default: return "Seeking";
+                        }
+                    })()
+
+                        : 'Waiting analisis'}</b>
 
                 </div>
 
