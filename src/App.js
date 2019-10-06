@@ -15,7 +15,7 @@ function App() {
       <div className="App" >
         {/* <DataProvider endpoint="http://127.0.0.1:8000/api/classifier/"
         render={data => <Table data={data} />} /> */}
-        <FormSentimentIndex endpoint="http://127.0.0.1:8000/api/index/" />
+        <FormSentimentIndex endpoint="https://apidjangoproyectoingtegrador1.herokuapp.com/api/index/" />
       </div>
 
     </div>
