@@ -20,7 +20,7 @@ class FormSentimentIndex extends Component {
         e.preventDefault();
         const { texto} = this.state;
         this.setState({clearInput:!this.state.clearInput})
-        if(this.state.clearInput===false){
+        if(texto!==""&& this.state.clearInput===false){
             const lead = { texto };
             const conf = {
                 method: "post", 
