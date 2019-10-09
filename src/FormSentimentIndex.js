@@ -1,113 +1,115 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import Button from 'react-bootstrap/Button';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
+import Nav from 'react-bootstrap/Nav'
+import ButtonCarga from "./ButtonCarga";
+
 class FormSentimentIndex extends Component {
-    static propTypes = {
-        endpoint: PropTypes.string.isRequired
-    };
     state = {
         loaded: false,
+        clearInput: false,
         texto: "",
-        feeling: ""
+        feeling: "",
+        endpoint: "https://apidjangoproyectoingtegrador1.herokuapp.com/api/mlpindex/"
     };
     handleChange = e => {
         this.setState({ [e.target.name]: e.target.value });
     };
     handleSubmit = e => {
         e.preventDefault();
-        const { texto } = this.state;
-        const lead = { texto };
-        const conf = {
-            method: "post",
-            body: JSON.stringify(lead),
-            headers: new Headers({ "Content-Type": "application/json" })
-        };
-        fetch(this.props.endpoint, conf).then(response => {
-            return response.json();
-        }).then(data => {
-            this.setState({ feeling: data, loaded: true })
+        const { texto} = this.state;
+        this.setState({clearInput:!this.state.clearInput})
+        if(this.state.clearInput===false){
+            const lead = { texto };
+            const conf = {
+                method: "post", 
+                body: JSON.stringify(lead),
+                headers: new Headers({ "Content-Type": "application/json" })
+            };
+            fetch(this.state.endpoint, conf).then(response => {
+                return response.json();
+            }).then(data => {
+                this.setState({ feeling: data, loaded: true })
+                this.render()
+    
+            });
+
+        }
+        if(this.state.clearInput===true)
+        {
+            this.setState({ texto: "",feeling:""})
             this.render()
-
-        });
+        }
+     
     };
+    handleSelect = eventKey => {
+        if (eventKey === "RevHotel") {
+            this.setState({ endpoint: "https://apidjangoproyectoingtegrador1.herokuapp.com/api/mlpindex/" })
+        } else {
+            this.setState({ endpoint: "https://apidjangoproyectoingtegrador1.herokuapp.com/api/index/" })
+        }
 
+
+    };
     render() {
         const { loaded, texto, feeling } = this.state;
         return (
             <div>
                 <div className="column">
                     <form>
-
                         <div className="field">
-                            <h1>Tweet to analyze</h1>
+                            <h1>Texto a analizar</h1>
                             <Container>
-                                <Row>
-                                    <Col >
-                                        <div className="control ">
-                                            <input
-                                                autoFocus
-                                                className="input"
-                                                type="text"
-                                                name="texto"
-                                                onChange={this.handleChange}
-                                                value={texto}
-                                                required
-                                                size="100" />
-                                        </div>
-
-                                    </Col>
-                                    <Col sm={12}>
-                                        <div className="mt-3">
-                                            <DropdownButton
-                                                title="Choose text type"
-                                                id="dropdown-menu-align-right"
-                                            >
-                                                <Dropdown.Item eventKey="1">Tweet about Iphone</Dropdown.Item>
-                                                <Dropdown.Item eventKey="2">hotel review</Dropdown.Item>
-
-                                            </DropdownButton>
-
+                                <Row className="justify-content-md-center">
+                                    <div className="control ">
+                                        <input
+                                            autoFocus
+                                            className="input"
+                                            type="text"
+                                            name="texto"
+                                            onChange={this.handleChange}
+                                            value={texto}
+                                            required
+                                            size="100" />
+                                    </div>
+                                </Row>
+                                <Row className="justify-content-md-center">
+                                    <div className="mt-5">
+                                        El sentimiento para este texto es <b>{loaded ? (() => {
+                                            switch (feeling) {
+                                                case "[[0]]": return "Negativo";
+                                                case "[[1]]": return "Positivo";
+                                                default: return "Buscando";
+                                            }
+                                        })()
+                                            : 'Esperando análisis'}</b>
+                                    </div>
+                                </Row>
+                                <Row className="justify-content-md-center">
+                                    <Col md="auto" >
+                                        <div className="mt-4">
+                                            <Nav variant="pills" defaultActiveKey="RevHotel" onSelect={this.handleSelect}>
+                                                <Nav.Item>
+                                                    <Nav.Link eventKey="RevHotel">Revisión Hotel</Nav.Link>
+                                                </Nav.Item>
+                                                <Nav.Item>
+                                                    <Nav.Link eventKey="RevIphone">Tweet Iphone</Nav.Link>
+                                                </Nav.Item>
+                                            </Nav>
                                         </div>
                                     </Col>
                                 </Row>
-
                             </Container>
-
-
                         </div>
-
-                        <div className="control mt-5" >
-                            <Button
-                                variant="primary"
-                                onClick={this.handleSubmit}
-                            >
-                                {loaded ? 'New analisis' : 'OK. sentiment analisis'}
-                            </Button>
-
-
-
+                        <div className="control mt-5">                          
+                            <div onClick={this.handleSubmit}>                                                        
+                                <ButtonCarga></ButtonCarga>
+                            </div>
                         </div>
                     </form>
                 </div>
-                <div className="mt-5">
-                    The feeling for this tweet is <b>{loaded ? (() => {
-                        switch (feeling) {
-                            case "[[0]]": return "Negative";
-                            case "[[1]]": return "Positive";
-                            default: return "Seeking";
-                        }
-                    })()
-
-                        : 'Waiting analisis'}</b>
-
-                </div>
-
-            </div>
+            </div >
         );
     }
 }
