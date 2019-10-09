@@ -3,6 +3,7 @@ import React from 'react';
 // import Table from "./Table";
 import FormSentimentIndex from "./FormSentimentIndex";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
   return (
     <div className='mt-5' align="center" >
@@ -17,7 +18,11 @@ function App() {
         render={data => <Table data={data} />} /> */}
         <FormSentimentIndex endpoint="https://apidjangoproyectoingtegrador1.herokuapp.com/api/index/" />
       </div>
-
+    
+      <div>
+        Esta aplicación busca definir el sentimiento que contiene ya sea
+        un tweet o una opinión acerca de un Hotel
+      </div>
     </div>
   );
 }
