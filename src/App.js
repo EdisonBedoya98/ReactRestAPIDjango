@@ -43,7 +43,7 @@ function App() {
              
    </Card.Text>
             <Card.Text>
-              "Todo muy bien, ubicación, limpieza, decoración, tamaño de la habitación, albornoz" <b>(Positiva)</b>
+              "Todo muy bien, ubicación, limpieza, decoración, tamaño de la habitación" <b>(Positiva)</b>
            
            
      </Card.Text>
