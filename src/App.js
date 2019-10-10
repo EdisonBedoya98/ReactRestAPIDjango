@@ -36,9 +36,7 @@ function App() {
                 dada por el usuario que puede ser sobre hoteles o sobre Iphone, un ejemplo
                 de una opinión negativa puede ser: Me intentaron estafar un poco con una Suite y el wifi no llegaba a la habitación que nos dieron, y un ejemplo de
                  una opinión positiva puede ser: Todo muy bien, ubicación, limpieza, decoración, tamaño de la habitación, albornoz.
-             </Card.Text>
-            <Card.Link href="https://towardsdatascience.com/sentiment-analysis-concept-analysis-and-applications-6c94d6f58c17">Mas Información</Card.Link>
-
+             </Card.Text>            
           </Card.Body>
         </Card>
 
