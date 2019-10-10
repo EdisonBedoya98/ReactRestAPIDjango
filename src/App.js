@@ -32,8 +32,6 @@ function App() {
             <Card.Title>Información sobre la APP</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">MIDANSE</Card.Subtitle>
             <Card.Text>
-
-
               La aplicación MIDANSE clasifica una opinión como positiva o negativa. Actualmente funciona bajo dos modelos entrenados con textos de dos dominios: revisiones de servicios hoteleros y tweets sobre el producto Iphone. Ejemplos de opiniones que puede clasificar la aplicación:
               
  </Card.Text>

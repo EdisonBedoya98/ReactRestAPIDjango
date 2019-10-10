@@ -86,7 +86,7 @@ class FormSentimentIndex extends Component {
                                             : 'Esperando análisis'}</b>
                                     </div>
                                 </Row>
-                                <Row className="justify-content-md-center">
+                                {/* <Row className="justify-content-md-center">
                                     <Col md="auto" >
                                         <div className="mt-4">
                                             <Nav variant="pills" defaultActiveKey="RevHotel" onSelect={this.handleSelect}>
@@ -99,7 +99,7 @@ class FormSentimentIndex extends Component {
                                             </Nav>
                                         </div>
                                     </Col>
-                                </Row>
+                                </Row> */}
                             </Container>
                         </div>
                         <div className="control mt-5">                          
