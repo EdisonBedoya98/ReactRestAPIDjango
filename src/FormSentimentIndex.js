@@ -8,20 +8,24 @@ class FormSentimentIndex extends Component {
         loaded: false,
         clearInput: false,
         text: "",
-        feeling: "",
-        endpoint: "http://127.0.0.1:8000/model_analysis/"
+        endpoint: "http://127.0.0.1:8000/model_analysis/",
+        name: "",
+        code: "",
+        confidence: 0,
+        feeling:"" ,
+        entities: []
     };
     handleChange = e => {
         this.setState({ [e.target.name]: e.target.value });
     };
     handleSubmit = e => {
         e.preventDefault();
-        const { text} = this.state;
-        this.setState({clearInput:!this.state.clearInput})
-        if(text!==""&& this.state.clearInput===false){
+        const { text } = this.state;
+        this.setState({ clearInput: !this.state.clearInput })
+        if (text !== "" && this.state.clearInput === false) {
             const lead = { text };
             const conf = {
-                method: "post", 
+                method: "post",
                 body: JSON.stringify(lead),
                 headers: new Headers({ "Content-Type": "application/json" })
             };
@@ -30,23 +34,23 @@ class FormSentimentIndex extends Component {
             }).then(data => {
                 console.log(data)
                 this.setState({ feeling: data.feeling, loaded: true })
-              //  this.setState({ feeling: data, loaded: true })
-               this.render()
-    
+                //  this.setState({ feeling: data, loaded: true })
+                this.render()
+
             });
 
         }
-        if(this.state.clearInput===true)
-        {
-            this.setState({ text: "",feeling:""})
+        if (this.state.clearInput === true) {
+            this.setState({ text: "", feeling: "" })
             this.render()
         }
-     
+
     };
 
     render() {
-        const { loaded, text, feeling } = this.state;
+        const { loaded, text, name, code, confidence, feeling,entities } = this.state;
         console.log(feeling)
+        console.log(entities.indexOf(0))
         return (
             <div>
                 <div className="column">
@@ -69,6 +73,11 @@ class FormSentimentIndex extends Component {
                                 </Row>
                                 <Row className="justify-content-md-center">
                                     <div className="mt-5">
+                                        <b>{text}, {name}, {code}, {confidence}, {feeling},{entities[0]}</b>
+                                    </div>
+                                </Row>
+                                <Row className="justify-content-md-center">
+                                    <div className="mt-5">
                                         El sentimiento para este texto es <b>{loaded ? (() => {
                                             switch (feeling) {
                                                 case 0: return "Negativo";
@@ -78,11 +87,11 @@ class FormSentimentIndex extends Component {
                                         })()
                                             : 'Esperando análisis'}</b>
                                     </div>
-                                </Row>                              
+                                </Row>
                             </Container>
                         </div>
-                        <div className="control mt-5">                          
-                            <div onClick={this.handleSubmit}>                                                        
+                        <div className="control mt-5">
+                            <div onClick={this.handleSubmit}>
                                 <ButtonCarga></ButtonCarga>
                             </div>
                         </div>
