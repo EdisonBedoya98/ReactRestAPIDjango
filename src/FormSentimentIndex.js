@@ -3,12 +3,15 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Button from "@material-ui/core/Button";
 import { CircularProgress } from "@material-ui/core";
-import FolderList from "./FolderList";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 
 class FormSentimentIndex extends Component {
+
   state = {
     loading: false,
-   // clearInput: false,
+    // clearInput: false,
     text: "",
     endpoint: "http://127.0.0.1:8000/model_analysis/",
     name: "",
@@ -23,7 +26,7 @@ class FormSentimentIndex extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { text } = this.state;
-    this.setState({ loading: true })
+    this.setState({ loading: true });
     this.render();
     if (text !== "") {
       const lead = { text };
@@ -38,17 +41,25 @@ class FormSentimentIndex extends Component {
         })
         .then((data) => {
           console.log(data);
-          this.setState({ feeling: data.feeling, loading: false });
+          this.setState({
+            feeling: data.feeling,
+            loading: false,
+            name: data.name,
+            code: data.code,
+            confidence: data.confidence,
+            entities: data.entities,
+          });
           this.render();
         });
-    }else{
-        this.setState({ feeling: "",loading: false });
+    } else {
+      this.setState({ feeling: "", loading: false });
     }
   };
+  
 
   render() {
     const {
-    loading,
+      loading,
       text,
       name,
       code,
@@ -82,18 +93,28 @@ class FormSentimentIndex extends Component {
                 </Row>
                 <Row className="justify-content-md-center">
                   <div className="mt-5">
-                      
-                    <b>
-                      {text}, {name}, {code}, {confidence}, {feeling},
-                      {entities[0]}
-                    </b>
+                    <List>
+                      <ListItem>
+                        <ListItemText primary="Idioma" secondary={name} />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemText
+                          primary="Entidades"
+                          secondary={entities.map((entitie)=>
+                            entitie+", "
+                            )}
+                        />
+                           
+                      </ListItem>
+                     
+                    </List>
                   </div>
                 </Row>
                 <Row className="justify-content-md-center">
                   <div className="mt-5">
-                    El sentimiento para este texto es{" "} 
+                    El sentimiento para este texto es{" "}
                     <b>
-                      {feeling!==""
+                      {feeling !== ""
                         ? (() => {
                             if (feeling <= 0.5) {
                               return "Negativo 😟";
@@ -117,9 +138,7 @@ class FormSentimentIndex extends Component {
                 Analizar
               </Button>
             </div>
-            <div>
-              {loading ? <CircularProgress  /> : ""}
-            </div>
+            <div>{loading ? <CircularProgress /> : ""}</div>
           </form>
         </div>
       </div>
