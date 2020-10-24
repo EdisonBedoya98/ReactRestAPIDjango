@@ -6,9 +6,9 @@ import { CircularProgress } from "@material-ui/core";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import BasicTable from "./BasicTable";
 
 class FormSentimentIndex extends Component {
-
   state = {
     loading: false,
     // clearInput: false,
@@ -55,7 +55,6 @@ class FormSentimentIndex extends Component {
       this.setState({ feeling: "", loading: false });
     }
   };
-  
 
   render() {
     const {
@@ -79,20 +78,22 @@ class FormSentimentIndex extends Component {
               <Container>
                 <Row className="justify-content-md-center">
                   <div className="control ">
-                    <input
-                      autoFocus
-                      className="input"
+                  
+                    <textarea
                       type="text"
                       name="text"
+                      value={this.state.textAreaValue}
                       onChange={this.handleChange}
                       value={text}
+                        rows={5}
+                       cols={100}
                       required
-                      size="100"
                     />
                   </div>
                 </Row>
                 <Row className="justify-content-md-center">
                   <div className="mt-5">
+                    <BasicTable></BasicTable>
                     <List>
                       <ListItem>
                         <ListItemText primary="Idioma" secondary={name} />
@@ -100,13 +101,9 @@ class FormSentimentIndex extends Component {
                       <ListItem>
                         <ListItemText
                           primary="Entidades"
-                          secondary={entities.map((entitie)=>
-                            entitie+", "
-                            )}
+                          secondary={entities.map((entitie) => entitie + ", ")}
                         />
-                           
                       </ListItem>
-                     
                     </List>
                   </div>
                 </Row>
