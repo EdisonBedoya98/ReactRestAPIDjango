@@ -12,6 +12,7 @@ class FormSentimentIndex extends Component {
   state = {
     loading: false,
     // clearInput: false,
+    textArray: [],
     text: "",
     endpoint: "http://127.0.0.1:8000/model_analysis/",
     name: "",
@@ -42,6 +43,7 @@ class FormSentimentIndex extends Component {
         .then((data) => {
           console.log(data);
           this.setState({
+            textArray: data.textArray,
             feeling: data.feeling,
             loading: false,
             name: data.name,
@@ -58,6 +60,7 @@ class FormSentimentIndex extends Component {
 
   render() {
     const {
+      textArray,
       loading,
       text,
       name,
@@ -78,33 +81,24 @@ class FormSentimentIndex extends Component {
               <Container>
                 <Row className="justify-content-md-center">
                   <div className="control ">
-                  
                     <textarea
                       type="text"
                       name="text"
                       value={this.state.textAreaValue}
                       onChange={this.handleChange}
                       value={text}
-                        rows={5}
-                       cols={100}
+                      rows={5}
+                      cols={100}
                       required
                     />
                   </div>
                 </Row>
                 <Row className="justify-content-md-center">
                   <div className="mt-5">
-                    <BasicTable></BasicTable>
-                    <List>
-                      <ListItem>
-                        <ListItemText primary="Idioma" secondary={name} />
-                      </ListItem>
-                      <ListItem>
-                        <ListItemText
-                          primary="Entidades"
-                          secondary={entities.map((entitie) => entitie + ", ")}
-                        />
-                      </ListItem>
-                    </List>
+                    <BasicTable
+                      responseData={this.state}
+                    ></BasicTable>
+                
                   </div>
                 </Row>
                 <Row className="justify-content-md-center">
