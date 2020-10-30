@@ -103,17 +103,8 @@ class FormSentimentIndex extends Component {
                 </Row>
                 <Row className="justify-content-md-center">
                   <div className="mt-5">
-                    El sentimiento para este texto es{" "}
-                    <b>
-                      {feeling !== ""
-                        ? (() => {
-                            if (feeling <= 0.5) {
-                              return "Negativo 😟";
-                            } else {
-                              return "Positivo 🤗";
-                            }
-                          })()
-                        : "Ingrese el texto y analizalo"}
+                    <b>                    
+                       Ingrese el texto y analizalo
                     </b>
                   </div>
                 </Row>

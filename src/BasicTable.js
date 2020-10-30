@@ -47,8 +47,8 @@ export default function BasicTable(props) {
               <TableCell component="th" scope="row">
                 {row}
               </TableCell>
-              <TableCell align="right">{props.responseData.name}</TableCell>
-              <TableCell align="right">{props.responseData.feeling[index]}</TableCell>
+              <TableCell align="right">{props.responseData.name =='Spanish'?'Español':'Ingles'}</TableCell>
+              <TableCell align="right">{props.responseData.feeling[index]<0.5?'Negativo 😟':'Positivo 🤗'}</TableCell>
               <TableCell align="right">{props.responseData.entities[index].map((entitie) => entitie + " ")}</TableCell>
             </TableRow>
           ))}
