@@ -3,10 +3,8 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Button from "@material-ui/core/Button";
 import { CircularProgress } from "@material-ui/core";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import BasicTable from "./BasicTable";
+import FileInput from "./FileInput";
 
 class FormSentimentIndex extends Component {
   state = {
@@ -21,9 +19,18 @@ class FormSentimentIndex extends Component {
     feeling: "",
     entities: [],
   };
+
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  handler = (val) => {
+    this.setState({
+      text: val
+    })
+
+    console.log('hi desde el padre '+val)
+  }
   handleSubmit = (e) => {
     e.preventDefault();
     const { text } = this.state;
@@ -95,20 +102,34 @@ class FormSentimentIndex extends Component {
                 </Row>
                 <Row className="justify-content-md-center">
                   <div className="mt-5">
-                    <BasicTable
-                      responseData={this.state}
-                    ></BasicTable>
-                
+                    El idioma del texto analizado es:{" "}
+                    {(() => {
+                      if (name === "") {
+                        return <div></div>;
+                      } else if (name === "Spanish") {
+                        return <div>Español</div>;
+                      } else if (name === "English") {
+                        return <div>Ingles</div>;
+                      } else {
+                        return <div>Idioma no soportado</div>;
+                      }
+                    })()}
                   </div>
                 </Row>
                 <Row className="justify-content-md-center">
                   <div className="mt-5">
-                    <b>                    
-                       Ingrese el texto y analizalo
-                    </b>
+                    <BasicTable responseData={this.state}></BasicTable>
+                  </div>
+                </Row>
+                <Row className="justify-content-md-center">
+                  <div className="mt-5">
+                    <b>Ingrese el texto y analizalo</b>
                   </div>
                 </Row>
               </Container>
+            </div>
+            <div>
+              <FileInput handler = {this.handler}/>
             </div>
             <div className="control mt-5">
               <Button
