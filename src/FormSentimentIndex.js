@@ -100,6 +100,9 @@ class FormSentimentIndex extends Component {
                     />
                   </div>
                 </Row>
+            <div>
+              <FileInput handler = {this.handler}/>
+            </div>
                 <Row className="justify-content-md-center">
                   <div className="mt-5">
                     El idioma del texto analizado es:{" "}
@@ -127,9 +130,6 @@ class FormSentimentIndex extends Component {
                   </div>
                 </Row>
               </Container>
-            </div>
-            <div>
-              <FileInput handler = {this.handler}/>
             </div>
             <div className="control mt-5">
               <Button
