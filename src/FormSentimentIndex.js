@@ -12,7 +12,7 @@ class FormSentimentIndex extends Component {
     // clearInput: false,
     textArray: [],
     text: "",
-    endpoint: "http://127.0.0.1:8000/model_analysis/",
+    endpoint: "http://ec2-54-145-50-130.compute-1.amazonaws.com:8080/model_analysis/",
     name: "",
     code: "",
     confidence: 0,
